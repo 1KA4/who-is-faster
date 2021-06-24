@@ -1,93 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fast Game</title>
-   <style>
-       .gameArea{
-            width: 100%;
-            height: 97vh;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-       }
 
-       #btn{
-           height: 20px;
-           width: 120px;
-       }
-
-       .result{
-            text-align: center;
-            width: 300px;
-            height: 70px;
-       }
-       
-       .shape2{
-            width: 50px;
-            height: 50px;
-            background-color: yellowgreen;
-            border-radius: 100%;
-            position: absolute;
-       }
-   </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap" rel="stylesheet">
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <section id="gameArea" class="gameArea">   
+    <div id="gameArea" class="gameArea">
         <h1 id="result" class="result" onclick="start()">Start The Game</h1>
         <div id="shape" onclick="stop()" hidden></div>
-    </section>
+    </div>
 
+    <div class="levels">
+        <div class="level" onclick="setLevel(100)">
+            <p>Child</p>
+        </div>
+        <div class="level" onclick="setLevel(50)">
+            <p>Medium</p>
+        </div>
+        <div class="level"  onclick="setLevel(20)">
+            <p>Hard</p>
+        </div>
+        <div class="level"  onclick="setLevel(10)">
+            <p>Big BOSS</p>
+        </div>
+    </div>
 
-    <script>
-        var shape = document.getElementById("shape");
-        var gameResult = document.getElementById("result");
-        var btn = document.getElementById("btn");
-        var someShape, x, y, score, level = 0;
-        var userScore;
-        
-           while(level < 10 || level > 100){
-            level = prompt("Choose level:" + 
-                        "\n Big BOSS - enter 10. " + 
-                        "\n Hard - enter 20." + 
-                        "\n Medium - enter 50." + 
-                        "\n Child - enter 100.");
-            
-           }
-        
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min)) + min;
-        }
+    <div class="result__board">
+        <div class="results">
+            <p class="bb">BigBoss: 0</p>
+            <p class="hard">Hard: 0</p>
+            <p class="medium">Medium: 0</p>
+            <p class="child">Child: 0</p>
+        </div>
+    </div>
 
-        function getUserWidth() { return document.getElementsByTagName('body')[0].clientWidth; }
-        function getUserHeight() { return document.getElementsByTagName('body')[0].clientHeight; }
-
-        function start() {
-            gameResult.setAttribute("hidden", "hidden");
-            
-            shape.removeAttribute("hidden");
-            shape.setAttribute("class", "shape2");
-            shape.style.width = level + "px";
-            shape.style.height = level + "px";
-            y = getRandomInt(100, getUserHeight()-level);
-            x = getRandomInt(100, getUserWidth()-level);
-            shape.style.top = y + "px";
-            shape.style.left = x + "px";
-            userScore = new Date().getTime();
-        }
-
-        function stop() {
-            shape.setAttribute("hidden", "hidden");
-           
-            score = (new Date().getTime()) - userScore;
-            gameResult.innerHTML = "Your score is " + score + " milliseconds." + (score < 400 ? " Gratulation!" : " Try again!");
-            gameResult.removeAttribute("hidden");
-        }
-
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
